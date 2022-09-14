@@ -22,6 +22,10 @@ const DiscountModal = ({ open, onClose }) => {
 	const [applicableAmount, setApplicableAmount] = useState(0);
 	const [netApplicableDiscount, setNetApplicableDiscount] = useState(0);
 
+	const [basePricePerSqFt] = useState(5747);
+	// const [discountedBasePrice, setDiscountedBas]
+	const [totalArea] = useState(1058);
+
 	const handleChangeDiscount = (event) => {
 		setDiscount(event.target.value);
 	};
@@ -32,7 +36,9 @@ const DiscountModal = ({ open, onClose }) => {
 
 	const handleNetApplicableDiscount = () => {};
 
-	const applyDiscount = () => {};
+	const applyDiscount = () => {
+		onClose();
+	};
 
 	return (
 		<Modal open={open} onClose={onClose}>
@@ -141,18 +147,50 @@ const DiscountModal = ({ open, onClose }) => {
 						</Button>
 					</Stack>
 					<Stack sx={{ flex: 1 }}>
-						<Typography variant="h6">Summary</Typography>
+						<Typography variant="h6" marginBottom={1}>
+							Summary
+						</Typography>
+						<SingleDetails
+							title={"Base price per sq ft."}
+							content={`Rs ${basePricePerSqFt}`}
+						/>
+						<SingleDetails
+							title={"Total Area"}
+							content={`${totalArea} sqft.`}
+						/>
+
+						<Box sx={{ padding: 2 }}></Box>
 						<Box
-							sx={{ backgroundColor: "#e8e8e8", padding: 2, borderRadius: 1 }}
+							sx={{
+								backgroundColor: "#e8e8e8",
+								padding: 2,
+								borderRadius: 1,
+							}}
 						>
 							<SingleDetails
 								title="Discount Per Sqft"
-								content={`Rs ${discountAmount}`}
+								content={`Rs ${discountAmount || 0}`}
 							/>
 							<SingleDetails
 								title="Net Discount"
-								content={`Rs ${applicableAmount}`}
+								content={`Rs ${applicableAmount || 0}`}
 							/>
+						</Box>
+						<Box
+							sx={{
+								padding: 2,
+								backgroundColor: "#e8e8e8",
+								marginTop: 2,
+								borderRadius: 2,
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}
+						>
+							<Typography variant="body1">All Inclusive Total</Typography>
+							<Typography variant="body2">
+								Rs {totalArea * basePricePerSqFt}
+							</Typography>
 						</Box>
 					</Stack>
 				</Stack>

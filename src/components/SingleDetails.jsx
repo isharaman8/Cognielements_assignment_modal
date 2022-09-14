@@ -10,8 +10,15 @@ const SingleDetails = ({ title, content }) => {
 			alignItems="center"
 			sx={{ width: "100%" }}
 		>
-			<Typography variant="body1">{title}</Typography>
-			<Typography variant="body1">{content}</Typography>
+			<Typography
+				variant="body2"
+				sx={{ fontWeight: 600, color: "gray", fontSize: 12 }}
+			>
+				{title}
+			</Typography>
+			<Typography variant="body2" sx={{ fontSize: 12 }}>
+				{content}
+			</Typography>
 		</Stack>
 	);
 };
